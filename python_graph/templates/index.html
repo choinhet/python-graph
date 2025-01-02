@@ -34,21 +34,25 @@
 
 <script>
     const screenCanvas = document.getElementById("screen-canvas");
-    screenCanvas.width = screenCanvas.clientWidth;
-    screenCanvas.height = screenCanvas.clientHeight;
 
     var graph = new LiteGraph.LGraph();
     var canvas = new LiteGraph.LGraphCanvas("#screen-canvas", graph);
     canvas.allow_searchbox = false;
-
     function toggleMenu() {
         const menu = document.querySelector(".menu");
         menu.classList.toggle("hidden");
     }
 
-    window.addEventListener("dblclick", (event) => {
-        toggleMenu();
-    });
+    function resizeCanvas() {
+        screenCanvas.width = screenCanvas.clientWidth;
+        screenCanvas.height = screenCanvas.clientHeight;
+    }
+
+    resizeCanvas();
+    LiteGraph.ContextMenu = null;
+    window.addEventListener('resize', () => resizeCanvas())
+    window.addEventListener("dblclick", (event) => { toggleMenu(); });
+    window.addEventListener("contextmenu", (event) => { toggleMenu(); });
 
 
     graph.start();
