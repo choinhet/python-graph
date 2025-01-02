@@ -1,0 +1,9 @@
+version: 3
+
+tasks:
+  build:
+    cmds:
+      - tailwindcss -i python_graph/resources/input.css -o python_graph/resources/output.css --watch --minify
+  run:
+    cmds:
+      - uvicorn python_graph.main:app --reload

@@ -1,0 +1,10 @@
+[project]
+name = "python-graph"
+version = "0.1.0"
+description = "Functional programming with graphs in Python"
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "fastapi[standard]>=0.115.6",
+    "jinja2>=3.1.5",
+]
