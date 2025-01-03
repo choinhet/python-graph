@@ -3,8 +3,15 @@
 ## Functional programming with graphs in Python
 
 
-### Dependencies - Make sure to install Go Task
+### Dependencies - Make sure to install Go Task and UV
 
+#### UV - Through pip
+
+```sh
+pip install uv
+```	
+
+#### Go Task
 
 #### Windows
 
@@ -37,6 +44,11 @@ brew install go-task/tap/go-task
 sudo apt install task
 ```
 
+#### Start a .venv
+
+```sh
+uv sync
+```
 
 ### Run the app
 
