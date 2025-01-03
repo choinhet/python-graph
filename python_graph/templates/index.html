@@ -17,18 +17,20 @@
         class="menu hidden flex-col gap-8 w-1/2 rounded-lg h-fit max-h-48 overflow-y-auto p-4 m-10 opacity-80 text-white text-bold absolute bottom-0 left-[50%] translate-x-[-50%] bg-zinc-500">
         <div class="flex flex-row gap-4 items-center">
             <p class="text-nowrap">Search nodes:</p>
-            <input type="text" class="w-full p-2 rounded-lg bg-zinc-700 text-white" />
+            <input type="text" name="search" class="w-full p-2 rounded-lg bg-zinc-700 text-white"
+                hx-post="/nodes/search" hx-target="#node-list" hx-trigger="keyup delay:500ms" />
         </div>
-        <div class="nodes">
-            <ul class="flex flex-row flex-wrap gap-2">
-                <li class="flex flex-row gap-2 items-center">
-                    <button class="bg-zinc-700 p-2 rounded-lg text-white">Node 1</button>
-                </li>
-                <li class="flex flex-row gap-2 items-center">
-                    <button class="bg-zinc-700 p-2 rounded-lg text-white">Node 2</button>
-                </li>
-            </ul>
-        </div>
+        <ul class="flex flex-row flex-wrap gap-2" id="node-list">
+            {% macro node_list(nodes) %}
+            {% for node in nodes %}
+            <li class="flex flex-row gap-2 items-center" id="node-item">
+                <button class="bg-zinc-700 p-2 rounded-lg text-white">{{node.name}}</button>
+            </li>
+            {% endfor %}
+            {% endmacro %}
+            {{ node_list(nodes) }}
+        </ul>
+    </div>
     </div>
 </body>
 
