@@ -11,14 +11,20 @@
     <script type="text/javascript" src="resources/litegraph.min.js"></script>
 </head>
 
-<body class="w-screen h-screen">
+<body class="w-screen h-screen relative">
     <canvas id="screen-canvas" class="h-full w-full relative"></canvas>
+    <div class="flex flex-row w-full absolute top-0 left-0 h-sm p-4 gap-4 bg-zinc-500 opacity-80 text-white">
+        <p class="px-4 cursor-pointer underline underline-offset-4" hx-get="/workflow/load" hx-target="#screen-canvas">
+            Load Workflow</p>
+        <p class="px-4 cursor-pointer underline underline-offset-4" hx-get="/workflow/save" hx-target="#screen-canvas">
+            Save Workflow</p>
+    </div>
     <div
         class="menu hidden flex-col gap-8 w-1/2 rounded-lg h-fit max-h-48 overflow-y-auto p-4 m-10 opacity-80 text-white text-bold absolute bottom-0 left-[50%] translate-x-[-50%] bg-zinc-500">
         <div class="flex flex-row gap-4 items-center">
             <p class="text-nowrap">Search nodes:</p>
             <input type="text" name="search" class="w-full p-2 rounded-lg bg-zinc-700 text-white"
-                hx-post="/nodes/search" hx-target="#node-list" hx-trigger="keyup delay:500ms" />
+                hx-post="/nodes/search" hx-target="#node-list" hx-trigger="keyup delay:150ms" />
         </div>
         <ul class="flex flex-row flex-wrap gap-2" id="node-list">
             {% macro node_list(nodes) %}
@@ -53,10 +59,12 @@
 
     resizeCanvas();
     LiteGraph.ContextMenu = null;
-    window.addEventListener('resize', () => resizeCanvas())
-    window.addEventListener("dblclick", (event) => { toggleMenu(); });
-    window.addEventListener("contextmenu", (event) => { toggleMenu(); });
-
+    function attachEventListeners() {
+        window.addEventListener('resize', () => resizeCanvas())
+        window.addEventListener("dblclick", (event) => { toggleMenu(); });
+        window.addEventListener("contextmenu", (event) => { toggleMenu(); });
+    }
+    attachEventListeners();
 
     graph.start();
 </script>

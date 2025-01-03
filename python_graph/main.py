@@ -63,5 +63,21 @@ async def search_nodes(request: Request):
     return template.module.node_list(nodes=filtered_nodes)
 
 
+@app.get("/workflow/load", response_class=HTMLResponse)
+async def load_workflow(request: Request):
+    log.info("Loading workflow")
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "nodes": nodes}
+    )
+
+
+@app.get("/workflow/save", response_class=HTMLResponse)
+async def save_workflow(request: Request):
+    log.info("Saving workflow")
+    return templates.TemplateResponse(
+        "index.html", {"request": request, "nodes": nodes}
+    )
+
+
 if __name__ == "__main__":
     uvicorn.run(app, host="localhost", port=8000)
